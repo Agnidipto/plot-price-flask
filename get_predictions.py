@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
+
 import tensorflow as tf
 import numpy as np
 import json
 
-from exceptions import ModelNotLoaded
+from exceptions import ModelNotLoaded, CannotLoadModel
 
 class Predictions() :
   
@@ -15,13 +17,19 @@ class Predictions() :
     if self.model != None :
       return "Model already Loaded!"
     
-    self.model = tf.keras.models.load_model('my_model.keras')
+    try : 
+    
+      self.model = tf.keras.models.load_model('my_model.keras')
 
-    with open('columns.json', 'r') as file:
-        # Load the JSON data into a dictionary
-        data_dict = json.load(file)
+      with open('columns.json', 'r', encoding='utf-8') as file:
+          # Load the JSON data into a dictionary
+          data_dict = json.load(file)
 
-    self.data_columns = data_dict['data_columns']
+      self.data_columns = data_dict['data_columns']
+    
+    except Exception as e :
+      print(e)
+      raise CannotLoadModel()
 
     return "Model Loaded Successfully!"
 
