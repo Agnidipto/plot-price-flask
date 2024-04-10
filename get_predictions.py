@@ -19,9 +19,9 @@ class Predictions() :
     
     try : 
     
-      self.model = tf.keras.models.load_model('api/my_model.keras')
+      self.model = tf.keras.models.load_model('my_model.keras')
 
-      with open('api/columns.json', 'r', encoding='utf-8') as file:
+      with open('columns.json', 'r', encoding='utf-8') as file:
           # Load the JSON data into a dictionary
           data_dict = json.load(file)
 

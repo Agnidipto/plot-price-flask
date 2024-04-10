@@ -66,7 +66,7 @@ def predict() :
 @cross_origin()
 def get_locations() :
   try :
-    with open('api/locations.json', 'r') as file :
+    with open('locations.json', 'r') as file :
       data = json.load(file)
       return jsonify(data['locations'])
   except Exception as e :
